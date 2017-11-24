@@ -17,11 +17,11 @@ import java.util.List;
 
 @Dao
 public interface ProductDao {
-    @Query("SELECT * FROM product WHERE id= :productId")
-    List<Product> getProducts(int productId);
+    @Query("SELECT * FROM product WHERE category_id= :categoryId")
+    List<Product> getProducts(int categoryId);
 
     @Insert
-    void addProduct(Product product);
+    void addProduct(List<Product> list);
     @Update
     void editProduct(Product product);
     @Delete

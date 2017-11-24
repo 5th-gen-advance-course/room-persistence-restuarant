@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.ratha.rathanarestuarant.R;
 import com.example.ratha.rathanarestuarant.entity.Category;
+import com.example.ratha.rathanarestuarant.ui.dialog.CreateCategoryDialog;
 
 import java.util.List;
 
@@ -24,14 +25,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private Context context;
     private List<Category> list;
+    CreateCategoryDialog.CallBack callBack;
     public CategoryAdapter(Context context,List<Category> list){
         this.context=context;
         this.list=list;
+        callBack= (CreateCategoryDialog.CallBack) context;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewGroup viewGroup=(ViewGroup) LayoutInflater.from(context).inflate(R.layout.category_item_layout,parent,false);
-        return new CategoryAdapter.ViewHolder(viewGroup);
+        return new ViewHolder(viewGroup);
     }
 
     @Override
@@ -51,7 +54,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return list.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.categoryImage)
         ImageView categoryImage;
         @BindView(R.id.categoryTitle)
@@ -62,7 +65,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    callBack.onCategoryItemClicked(list.get(getAdapterPosition()));
                 }
             });
         }
@@ -71,6 +74,5 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void setList(List<Category> list) {
         this.list = list;
     }
-
 
 }

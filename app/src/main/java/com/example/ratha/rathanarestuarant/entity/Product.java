@@ -23,6 +23,13 @@ public class Product {
     @ColumnInfo(name="category_id")
     private int categoryId;
 
+
+    public Product(float price, String name, int categoryId) {
+        this.price = price;
+        this.name = name;
+        this.categoryId = categoryId;
+    }
+
     public int getId() {
         return id;
     }
